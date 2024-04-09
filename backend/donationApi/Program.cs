@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DonationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DonationContext") ?? throw new InvalidOperationException("Connection string 'DonationContext' not found.")));
 
 // Add services to the container.
 
