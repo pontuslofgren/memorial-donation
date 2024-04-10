@@ -1,35 +1,39 @@
+using System.Data.Common;
+using AutoMapper;
 using donationApi.DTOs;
 using donationApi.Models;
 using Stripe;
 
 namespace donationApi.Services;
 
-public class DonationService
+public class DonationService : IDonationService
 {
-    public MemorialDonationRequest CreateDonation(MemorialDonationRequest request)
+    private readonly DonationContext _context;
+    private readonly IMapper _mapper;
+    public DonationService(DonationContext context, IMapper mapper)
     {
-        // map it to an entity
-        // save it
-        // return
-        throw new NotImplementedException();
+        _context = context;
+        _mapper = mapper;
     }
     
-    public MemorialDonationRequest SetDonationStatusToSucceeded(Event stripeEvent)
+    public async Task CreateDonation(MemorialDonationRequest request)
     {
-        // fetch the donation from the database
-        // set status to succeeded
-        throw new NotImplementedException();
+        var memorialDonation = _mapper.Map<MemorialDonation>(request);
+        _context.Add(memorialDonation);
+        await _context.SaveChangesAsync();
     }
-
-    public MemorialDonationResponse GetDonation(Guid guid)
-    {
-        // find and return the MemorialDonationResponse
-        throw new NotImplementedException();
-    }
-
-    private Boolean IsDonationPersisted()
-    {
-        throw new NotImplementedException();
-    }
+    //
+    // public MemorialDonationRequest SetDonationStatusToSucceeded(Event stripeEvent)
+    // {
+    //     // fetch the donation from the database
+    //     // set status to succeeded
+    //     throw new NotImplementedException();
+    // }
+    //
+    // public MemorialDonationResponse GetDonation(Guid guid)
+    // {
+    //     // find and return the MemorialDonationResponse
+    //     throw new NotImplementedException();
+    // }
     
 }
