@@ -1,8 +1,8 @@
-using donationApi.Data;
+using donationApi.DTO;
 
 namespace donationApi.Services;
 
 public interface IBrevoClient
 { 
-    Task SendTributeEmail(TributeEmail emailDetails);
+    Task SendTributeEmail(EmailTemplateRequest emailDetails);
 }

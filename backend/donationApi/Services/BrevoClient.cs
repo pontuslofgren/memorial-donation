@@ -1,4 +1,5 @@
 using donationApi.Data;
+using donationApi.DTO;
 using RestSharp;
 
 namespace donationApi.Services;
@@ -15,7 +16,7 @@ public class BrevoClient: IBrevoClient
         _apiSecret = config["ApiKeys:BrevoApiKey"];
     }
 
-    public async Task SendTributeEmail(TributeEmail emailDetails)
+    public async Task SendTributeEmail(EmailTemplateRequest emailDetails)
     {
         Console.WriteLine("Sending email");
         var request = new RestRequest("");
