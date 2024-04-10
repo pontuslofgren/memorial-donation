@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 builder.Services.AddScoped<IDonationService, DonationService>();
+builder.Services.AddSingleton<IBrevoClient, BrevoClient>();
 
 var app = builder.Build();
 
