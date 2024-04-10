@@ -5,19 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { MemorialFormInput } from "./types";
 
 function MemorialForm() {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm<MemorialFormInput>()
+    const { register, handleSubmit, formState: { errors } } = useForm<MemorialFormInput>()
 
     const onSubmit: SubmitHandler<MemorialFormInput> = (data) => {
-        console.log(data);
         processPayment(data);
     }
-
-    console.log(watch("donorFirstName"));
 
     const stripe = useStripe();
     const elements = useElements();
@@ -31,8 +23,6 @@ function MemorialForm() {
     }
 
     const processPayment = async (data: MemorialFormInput) => {
-
-
         if (!stripe) {
             // Stripe.js hasn't yet loaded.
             return;
@@ -57,6 +47,9 @@ function MemorialForm() {
         });
 
         const { client_secret: clientSecret } = await res.json();
+
+        // update amount
+        elements?.update({ amount: data.amount * 100 })
 
         // Confirm the PaymentIntent using the details collected by the Payment Element
         const { error } = await stripe.confirmPayment({
@@ -113,7 +106,7 @@ function MemorialForm() {
                 <div className="mb-6">
                     <label className="block mb-2 text-sm font-medium text-gray-900">Email address</label>
                     <input placeholder="joe.biden@whitehouse.gov" type="email" {...register("email", { required: true })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                    {errors.donorLastName && <span>This field is required</span>}
+                    {errors.email && <span>This field is required</span>}
                 </div>
 
                 <div className="mb-6">
