@@ -1,4 +1,5 @@
 using donationApi.Configs;
+using donationApi.Services;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DonationContext>(options =>
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
+builder.Services.AddScoped<IDonationService, DonationService>();
 
 var app = builder.Build();
 
