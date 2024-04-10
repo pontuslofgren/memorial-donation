@@ -1,7 +1,7 @@
-using AutoMapper;
 using donationApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using donationApi.Models;
+using donationApi.Services;
 using Stripe;
 
 namespace donationApi.Controllers
@@ -10,32 +10,33 @@ namespace donationApi.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        private readonly DonationContext _context;
-        private readonly IMapper _mapper;
-
-        public PaymentsController(DonationContext context, IConfiguration config, IMapper mapper)
+        private IDonationService _donationService;
+        public PaymentsController(IConfiguration config, IDonationService donationService)
         {
-            _context = context;
             StripeConfiguration.ApiKey = config["ApiKeys:StripeTestKey"];
-            _mapper = mapper;
+            _donationService = donationService;
         }
 
         [HttpPost("create-payment-intent")]
-        public ActionResult<StripeClientSecretResponse> PostPaymentIntent(MemorialDonationRequest request)
+        public async Task<ActionResult<StripeClientSecretResponse>> PostPaymentIntent(MemorialDonationRequest request)
         {
-            Console.WriteLine($"{request.DonorFirstName} donated {request.Amount}");
-
-            var newDonation = _mapper.Map<MemorialDonation>(request);
-            Console.WriteLine($"{newDonation.DonorLastName} donated {newDonation.Amount}");
-            
-            var options = new PaymentIntentCreateOptions
+            try
             {
-                Amount = request.Amount,
-                Currency = "sek"
-            };
-            var service = new PaymentIntentService();
-            PaymentIntent intent = service.Create(options);
-            return new StripeClientSecretResponse() { ClientSecret = intent.ClientSecret };
+                await _donationService.CreateDonation(request);
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = request.Amount,
+                    Currency = "sek"
+                };
+                
+                var service = new PaymentIntentService();
+                PaymentIntent intent = service.Create(options);
+                return Ok(new StripeClientSecretResponse() { ClientSecret = intent.ClientSecret });
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Something went wrong. Please try again later.");
+            }
         }
         
         [HttpPost("webhook")]
@@ -66,6 +67,12 @@ namespace donationApi.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<MemorialDonationResponse>> GetDonation(Guid guid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
