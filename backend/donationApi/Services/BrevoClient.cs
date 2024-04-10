@@ -4,6 +4,7 @@ using RestSharp;
 
 namespace donationApi.Services;
 
+// TODO: Implement IDisposable
 public class BrevoClient: IBrevoClient
 {
     private readonly RestClient _client;
@@ -18,15 +19,10 @@ public class BrevoClient: IBrevoClient
 
     public async Task SendTributeEmail(EmailTemplateRequest emailDetails)
     {
-        Console.WriteLine("Sending email");
-        string jsonString = JsonSerializer.Serialize(emailDetails);
-        Console.WriteLine(jsonString);
         var request = new RestRequest("");
         request.AddHeader("accept", "application/json");
         request.AddHeader("api-key", _apiSecret);
-        // TODO: JsonBody from emailDetails
-        request.AddJsonBody("{\"sender\":{\"email\":\"postmaster@ullacarinstiftelse.se\",\"name\":\"Ulla-Carin Stiftelse\"},\"params\":{\"FIRSTNAME\":\"Pontus\",\"FNAME\":\"Ponta\"},\"attachment\":[{\"content\":\"b3JkZXIucGRm\",\"name\":\"myAttachment.png\"}],\"to\":[{\"email\":\"pontus@ullacarinstiftelse.se\",\"name\":\"Pontus\"}],\"tags\":[\"Test\"],\"templateId\":1}", false);
+        request.AddJsonBody(JsonSerializer.Serialize(emailDetails));
         var response = await _client.PostAsync(request);
-        Console.WriteLine("{0}", response.Content);
     }
 }
