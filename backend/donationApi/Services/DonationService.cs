@@ -1,5 +1,6 @@
 using System.Data.Common;
 using AutoMapper;
+using donationApi.DTO;
 using donationApi.DTOs;
 using donationApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,10 @@ public class DonationService : IDonationService
 
     public async Task SendTributeEmail(string clientSecret)
     {
-        throw new NotImplementedException();
+        var donation = await GetDonationByClientSecret(clientSecret);
+        var emailRequest = _mapper.Map<EmailTemplateRequest>(donation);
+        emailRequest.TemplateId = 1;
+        await _brevoClient.SendTributeEmail(emailRequest);
     }
     
     public async Task<MemorialDonation?> GetDonationByClientSecret(string clientSecret)

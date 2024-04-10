@@ -1,4 +1,4 @@
-using donationApi.Data;
+using System.Text.Json;
 using donationApi.DTO;
 using RestSharp;
 
@@ -19,6 +19,8 @@ public class BrevoClient: IBrevoClient
     public async Task SendTributeEmail(EmailTemplateRequest emailDetails)
     {
         Console.WriteLine("Sending email");
+        string jsonString = JsonSerializer.Serialize(emailDetails);
+        Console.WriteLine(jsonString);
         var request = new RestRequest("");
         request.AddHeader("accept", "application/json");
         request.AddHeader("api-key", _apiSecret);
