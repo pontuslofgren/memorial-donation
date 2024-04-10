@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using donationApi.Models;
+using Stripe;
 
 namespace donationApi.Controllers
 {
@@ -9,9 +10,10 @@ namespace donationApi.Controllers
     {
         private readonly DonationContext _context;
 
-        public PaymentsController(DonationContext context)
+        public PaymentsController(DonationContext context, IConfiguration config)
         {
             _context = context;
+            StripeConfiguration.ApiKey = config["ApiKeys:StripeTestKey"];
         }
     }
 }
