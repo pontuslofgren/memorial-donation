@@ -1,3 +1,4 @@
+using donationApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using donationApi.Models;
 using Stripe;
@@ -14,6 +15,19 @@ namespace donationApi.Controllers
         {
             _context = context;
             StripeConfiguration.ApiKey = config["ApiKeys:StripeTestKey"];
+        }
+
+        [HttpPost("create-payment-intent")]
+        public ActionResult<StripeClientSecretResponse> PostPaymentIntent()
+        {
+            var options = new PaymentIntentCreateOptions
+            {
+                Amount = 1099,
+                Currency = "usd"
+            };
+            var service = new PaymentIntentService();
+            PaymentIntent intent = service.Create(options);
+            return new StripeClientSecretResponse() { ClientSecret = intent.ClientSecret };
         }
     }
 }
