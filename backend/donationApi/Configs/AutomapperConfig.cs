@@ -9,5 +9,6 @@ public class AutomapperConfig : Profile
     public AutomapperConfig()
     {
         CreateMap<MemorialDonationRequest, MemorialDonation>().ReverseMap();
+        CreateMap<MemorialDonationResponse, MemorialDonation>().ReverseMap();
     }
 }
