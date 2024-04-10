@@ -32,6 +32,10 @@ namespace donationApi.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -60,7 +64,7 @@ namespace donationApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Donation");
+                    b.ToTable("Donations");
                 });
 #pragma warning restore 612, 618
         }
