@@ -116,9 +116,11 @@ function MemorialForm() {
                     {errors.donorLastName && <span>This field is required</span>}
                 </div>
 
-                <h3 className="text-lg font-bold mb-3">Payment details</h3>
-                <PaymentElement />
-                <button type="submit" disabled={!stripe || loading}>Make donation</button>
+                <div className="mb-6">
+                    <h3 className="text-lg font-bold mb-3">Payment details</h3>
+                    <PaymentElement />
+                </div>
+                <button type="submit" disabled={!stripe || loading} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Make donation</button>
                 {errorMessage && <div>{errorMessage}</div>}
             </form>
         </>
