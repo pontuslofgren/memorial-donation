@@ -2,6 +2,7 @@ using System.Data.Common;
 using AutoMapper;
 using donationApi.DTOs;
 using donationApi.Models;
+using Microsoft.EntityFrameworkCore;
 using Stripe;
 
 namespace donationApi.Services;
@@ -16,19 +17,24 @@ public class DonationService : IDonationService
         _mapper = mapper;
     }
     
-    public async Task CreateDonation(MemorialDonationRequest request)
+    public async Task CreateDonation(MemorialDonationRequest request, StripeClientSecretResponse clientSecret)
     {
         var memorialDonation = _mapper.Map<MemorialDonation>(request);
+        memorialDonation.ClientSecret = clientSecret.ClientSecret;
         _context.Add(memorialDonation);
         await _context.SaveChangesAsync();
     }
-    //
-    // public MemorialDonationRequest SetDonationStatusToSucceeded(Event stripeEvent)
-    // {
-    //     // fetch the donation from the database
-    //     // set status to succeeded
-    //     throw new NotImplementedException();
-    // }
+    
+    public async Task SetDonationStatusToSucceeded(string clientSecret)
+    {
+        var donation = await _context.Donations
+            .FirstOrDefaultAsync(donation => donation.ClientSecret == clientSecret);
+
+        donation.HasSucceededPayment = true;
+
+        _context.Update(donation);
+        await _context.SaveChangesAsync();
+    }
     //
     // public MemorialDonationResponse GetDonation(Guid guid)
     // {

@@ -22,7 +22,6 @@ namespace donationApi.Controllers
         {
             try
             {
-                await _donationService.CreateDonation(request);
                 var options = new PaymentIntentCreateOptions
                 {
                     Amount = request.Amount,
@@ -31,7 +30,9 @@ namespace donationApi.Controllers
                 
                 var service = new PaymentIntentService();
                 PaymentIntent intent = service.Create(options);
-                return Ok(new StripeClientSecretResponse() { ClientSecret = intent.ClientSecret });
+                var clientSecret = new StripeClientSecretResponse() { ClientSecret = intent.ClientSecret }; 
+                await _donationService.CreateDonation(request, clientSecret);
+                return Ok(clientSecret);
             }
             catch (Exception e)
             {
@@ -52,7 +53,7 @@ namespace donationApi.Controllers
                 if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-                    Console.WriteLine($"Payment succeeded. {paymentIntent!.Id}");
+                    await _donationService.SetDonationStatusToSucceeded(paymentIntent.ClientSecret);
                     // Then define and call a method to handle the successful payment intent.
                     // handlePaymentIntentSucceeded(paymentIntent);
                 }

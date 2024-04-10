@@ -5,7 +5,7 @@ namespace donationApi.Services;
 
 public interface IDonationService
 {
-    public Task CreateDonation(MemorialDonationRequest request);
-    // public MemorialDonationRequest SetDonationStatusToSucceeded(Event stripeEvent);
+    public Task CreateDonation(MemorialDonationRequest request, StripeClientSecretResponse clientSecret);
+    public Task SetDonationStatusToSucceeded(string clientSecret);
     // public MemorialDonationResponse GetDonation(Guid guid);
 }
