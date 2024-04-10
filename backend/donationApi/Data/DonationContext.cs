@@ -12,5 +12,5 @@ using donationApi.Models;
         {
         }
 
-        public DbSet<MemorialDonation> Donation { get; set; } = default!;
+        public DbSet<MemorialDonation> Donations { get; set; } = default!;
     }
