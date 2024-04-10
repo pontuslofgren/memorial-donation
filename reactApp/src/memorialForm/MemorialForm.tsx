@@ -1,7 +1,12 @@
+import { PaymentElement } from "@stripe/react-stripe-js";
+
 function MemorialForm() {
     return (
         <>
-            Hello from MemorialForm
+            <form>
+                <PaymentElement />
+                <button>Submit</button>
+            </form>
         </>
     )
 }
