@@ -57,7 +57,7 @@ function MemorialForm() {
             clientSecret,
             confirmParams: {
                 // TODO: create success route and add return url
-                return_url: 'https://example.com/order/123/complete',
+                return_url: 'https://localhost:5173/success',
             },
         });
 
