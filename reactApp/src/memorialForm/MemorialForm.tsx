@@ -11,9 +11,10 @@ function MemorialForm() {
         watch,
         formState: { errors },
     } = useForm<MemorialFormInput>()
+
     const onSubmit: SubmitHandler<MemorialFormInput> = (data) => {
         console.log(data);
-        processPayment();
+        processPayment(data);
     }
 
     console.log(watch("donorFirstName"));
@@ -29,7 +30,7 @@ function MemorialForm() {
         setErrorMessage(error.message);
     }
 
-    const processPayment = async () => {
+    const processPayment = async (data: MemorialFormInput) => {
 
 
         if (!stripe) {
@@ -49,6 +50,10 @@ function MemorialForm() {
         // Create the PaymentIntent and obtain clientSecret
         const res = await fetch("http://localhost:5040/api/payments/create-payment-intent", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         });
 
         const { client_secret: clientSecret } = await res.json();
