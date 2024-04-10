@@ -1,8 +1,23 @@
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeError } from "@stripe/stripe-js";
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form"
+import { MemorialFormInput } from "./types";
 
 function MemorialForm() {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<MemorialFormInput>()
+    const onSubmit: SubmitHandler<MemorialFormInput> = (data) => {
+        console.log(data);
+        processPayment();
+    }
+
+    console.log(watch("donorFirstName"));
+
     const stripe = useStripe();
     const elements = useElements();
 
@@ -14,8 +29,8 @@ function MemorialForm() {
         setErrorMessage(error.message);
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const processPayment = async () => {
+
 
         if (!stripe) {
             // Stripe.js hasn't yet loaded.
@@ -56,7 +71,9 @@ function MemorialForm() {
     };
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input defaultValue="test" {...register("donorFirstName")} />
+                {errors.donorFirstName && <span>This field is required</span>}
                 <PaymentElement />
                 <button type="submit" disabled={!stripe || loading}>Make donation</button>
                 {errorMessage && <div>{errorMessage}</div>}
