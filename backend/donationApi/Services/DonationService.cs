@@ -30,8 +30,7 @@ public class DonationService : IDonationService
     
     public async Task SetDonationStatusToSucceeded(string clientSecret)
     {
-        var donation = await _context.Donations
-            .FirstOrDefaultAsync(donation => donation.ClientSecret == clientSecret);
+        var donation = await GetDonationByClientSecret(clientSecret);
 
         donation.HasSucceededPayment = true;
 
@@ -43,11 +42,11 @@ public class DonationService : IDonationService
     {
         throw new NotImplementedException();
     }
-    //
-    // public MemorialDonationResponse GetDonation(Guid guid)
-    // {
-    //     // find and return the MemorialDonationResponse
-    //     throw new NotImplementedException();
-    // }
+    
+    public async Task<MemorialDonation?> GetDonationByClientSecret(string clientSecret)
+    {
+        return await _context.Donations
+            .FirstOrDefaultAsync(donation => donation.ClientSecret == clientSecret);
+    }
     
 }
