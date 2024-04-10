@@ -72,8 +72,11 @@ function MemorialForm() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input defaultValue="test" {...register("donorFirstName")} />
-                {errors.donorFirstName && <span>This field is required</span>}
+                <div className="mb-6">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">First name</label>
+                    <input placeholder="test" {...register("donorFirstName")} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                    {errors.donorFirstName && <span>This field is required</span>}
+                </div>
                 <PaymentElement />
                 <button type="submit" disabled={!stripe || loading}>Make donation</button>
                 {errorMessage && <div>{errorMessage}</div>}
