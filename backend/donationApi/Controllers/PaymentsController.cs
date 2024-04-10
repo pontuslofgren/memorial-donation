@@ -25,7 +25,7 @@ namespace donationApi.Controllers
             var options = new PaymentIntentCreateOptions
             {
                 Amount = request.Amount,
-                Currency = "usd"
+                Currency = "sek"
             };
             var service = new PaymentIntentService();
             PaymentIntent intent = service.Create(options);
