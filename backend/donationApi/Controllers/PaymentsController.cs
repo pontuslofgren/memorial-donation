@@ -18,11 +18,13 @@ namespace donationApi.Controllers
         }
 
         [HttpPost("create-payment-intent")]
-        public ActionResult<StripeClientSecretResponse> PostPaymentIntent()
+        public ActionResult<StripeClientSecretResponse> PostPaymentIntent(MemorialDonationRequest request)
         {
+            Console.WriteLine($"{request.DonorFirstName} donated {request.Amount}");
+            
             var options = new PaymentIntentCreateOptions
             {
-                Amount = 1099,
+                Amount = request.Amount,
                 Currency = "usd"
             };
             var service = new PaymentIntentService();
