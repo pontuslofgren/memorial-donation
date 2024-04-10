@@ -8,4 +8,5 @@ public interface IDonationService
     public Task CreateDonation(MemorialDonationRequest request, StripeClientSecretResponse clientSecret);
     public Task SetDonationStatusToSucceeded(string clientSecret);
     // public MemorialDonationResponse GetDonation(Guid guid);
+    public Task SendTributeEmail(string clientSecret);
 }

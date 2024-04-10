@@ -11,10 +11,13 @@ public class DonationService : IDonationService
 {
     private readonly DonationContext _context;
     private readonly IMapper _mapper;
-    public DonationService(DonationContext context, IMapper mapper)
+    private readonly IBrevoClient _brevoClient;
+
+    public DonationService(DonationContext context, IMapper mapper, IBrevoClient brevoClient)
     {
         _context = context;
         _mapper = mapper;
+        _brevoClient = brevoClient;
     }
     
     public async Task CreateDonation(MemorialDonationRequest request, StripeClientSecretResponse clientSecret)
@@ -34,6 +37,11 @@ public class DonationService : IDonationService
 
         _context.Update(donation);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task SendTributeEmail(string clientSecret)
+    {
+        throw new NotImplementedException();
     }
     //
     // public MemorialDonationResponse GetDonation(Guid guid)

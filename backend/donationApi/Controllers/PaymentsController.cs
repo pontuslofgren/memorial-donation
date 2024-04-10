@@ -1,4 +1,3 @@
-using donationApi.Data;
 using donationApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using donationApi.Models;
@@ -12,12 +11,10 @@ namespace donationApi.Controllers
     public class PaymentsController : ControllerBase
     {
         private IDonationService _donationService;
-        private IBrevoClient _brevoClient;
-        public PaymentsController(IConfiguration config, IDonationService donationService, IBrevoClient brevoClient)
+        public PaymentsController(IConfiguration config, IDonationService donationService)
         {
             StripeConfiguration.ApiKey = config["ApiKeys:StripeTestKey"];
             _donationService = donationService;
-            _brevoClient = brevoClient;
         }
 
         [HttpPost("create-payment-intent")]
@@ -57,7 +54,7 @@ namespace donationApi.Controllers
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
                     await _donationService.SetDonationStatusToSucceeded(paymentIntent.ClientSecret);
-                    await _brevoClient.SendTributeEmail(new TributeEmail() { Honoree = "Temp" });
+                    await _donationService.SendTributeEmail(paymentIntent.ClientSecret);
                     // Then define and call a method to handle the successful payment intent.
                     // handlePaymentIntentSucceeded(paymentIntent);
                 }
