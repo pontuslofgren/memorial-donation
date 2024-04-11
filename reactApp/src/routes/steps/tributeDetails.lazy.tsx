@@ -7,6 +7,7 @@ import { Form } from '../../components/Form'
 import { Button } from '../../components/Button';
 import { tributeDetailsFormInput } from '../../memorialForm/types';
 import { Stepper } from '../../components/Stepper';
+import { Textarea } from '../../components/Textarea';
 
 export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
     component: TributeDetails,
@@ -44,7 +45,7 @@ function TributeDetails() {
                     </Field>
 
                     <Field label="Message" error={errors?.message}>
-                        <Input
+                        <Textarea
                             {...register("message", { required: "Message is required" })}
                             id="message"
                         />

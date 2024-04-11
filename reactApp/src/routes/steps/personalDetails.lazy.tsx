@@ -14,7 +14,7 @@ export const Route = createLazyFileRoute('/steps/personalDetails')({
 
 function PersonalDetails() {
     const [state, setState] = useAppState();
-    const step = 2;
+    const step = 3;
     console.log(state);
     const {
         handleSubmit,
