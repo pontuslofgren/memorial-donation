@@ -53,8 +53,9 @@ namespace donationApi.Controllers
                 if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-                    await _donationService.SetDonationStatusToSucceeded(paymentIntent.ClientSecret);
-                    await _donationService.SendTributeEmail(paymentIntent.ClientSecret);
+                    await _donationService.HandlePaymentSuccess(paymentIntent.ClientSecret);
+                    // await _donationService.SetDonationStatusToSucceeded(paymentIntent.ClientSecret);
+                    // await _donationService.SendTributeEmail(paymentIntent.ClientSecret);
                     // Then define and call a method to handle the successful payment intent.
                     // handlePaymentIntentSucceeded(paymentIntent);
                 }

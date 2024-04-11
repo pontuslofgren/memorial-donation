@@ -29,19 +29,30 @@ public class DonationService : IDonationService
         await _context.SaveChangesAsync();
     }
     
-    public async Task SetDonationStatusToSucceeded(string clientSecret)
+    public async Task HandlePaymentSuccess(string clientSecret)
     {
         var donation = await GetDonationByClientSecret(clientSecret);
 
+        if (donation == null)
+        {
+            throw new Exception("Cannot find donation.");
+        }
+        
+        await SetDonationStatusToSucceeded(donation);
+        var pdf = PdfGeneratorService.GenerateTributePdf(_mapper.Map<TributePdf>(donation));
+        Console.WriteLine($"[DEBUG] {pdf}");
+        await SendTributeEmail(donation);
+    }
+    
+    public async Task SetDonationStatusToSucceeded(MemorialDonation donation)
+    {
         donation.HasSucceededPayment = true;
-
         _context.Update(donation);
         await _context.SaveChangesAsync();
     }
 
-    public async Task SendTributeEmail(string clientSecret)
+    public async Task SendTributeEmail(MemorialDonation donation)
     {
-        var donation = await GetDonationByClientSecret(clientSecret);
         var emailRequest = _mapper.Map<EmailTemplateRequest>(donation);
         emailRequest.TemplateId = 1;
         await _brevoClient.SendTributeEmail(emailRequest);
