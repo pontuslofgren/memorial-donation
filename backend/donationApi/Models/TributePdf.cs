@@ -1,6 +1,6 @@
-namespace donationApi.DTOs;
+namespace donationApi.Models;
 
-public class TributePdfRequest
+public class TributePdf
 {
     public required string Honoree { get; set; }
     public required string Message { get; set; }
