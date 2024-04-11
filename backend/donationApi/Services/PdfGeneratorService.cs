@@ -5,7 +5,10 @@ namespace donationApi.Services;
 
 public class PdfGeneratorService
 {
-    // Add the license and other config
+
+
+
+
     
     public MemoryStream GenerateTributePdf(TributePdf tribute)
     {
