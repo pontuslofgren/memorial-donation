@@ -1,10 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace donationApi.DTO;
 
 public record EmailTemplateRequest
 {
     public ParamsRecord? Params { get; set; }
     public required List<RecipientRecord> To { get; set; }
-    public List<AttachmentRecord>? Attachment { get; set; }
+    public List<AttachmentRecord> Attachment { get; set; } = new List<AttachmentRecord>();
     public int TemplateId { get; set; }
     
     public record ParamsRecord

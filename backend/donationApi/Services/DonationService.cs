@@ -40,8 +40,7 @@ public class DonationService : IDonationService
         
         await SetDonationStatusToSucceeded(donation);
         var pdf = PdfGeneratorService.GenerateTributePdf(_mapper.Map<TributePdf>(donation));
-        Console.WriteLine($"[DEBUG] {pdf}");
-        await SendTributeEmail(donation);
+        await SendTributeEmail(donation, pdf);
     }
     
     public async Task SetDonationStatusToSucceeded(MemorialDonation donation)
@@ -51,10 +50,19 @@ public class DonationService : IDonationService
         await _context.SaveChangesAsync();
     }
 
-    public async Task SendTributeEmail(MemorialDonation donation)
+    public async Task SendTributeEmail(MemorialDonation donation, string? pdf)
     {
         var emailRequest = _mapper.Map<EmailTemplateRequest>(donation);
         emailRequest.TemplateId = 1;
+        if (pdf is not null)
+        {
+            var attachment = new EmailTemplateRequest.AttachmentRecord()
+            {
+                Content = pdf,
+                Name = "eCard.pdf"
+            };
+            emailRequest.Attachment.Add(attachment);
+        }
         await _brevoClient.SendTributeEmail(emailRequest);
     }
     
