@@ -25,7 +25,7 @@ function TributeDetails() {
     const saveData = (data) => {
         console.log("Hello")
         setState({ ...state, ...data });
-        navigate({ to: '/personalDetails' });
+        navigate({ to: '/steps/personalDetails' });
     };
 
     return (
