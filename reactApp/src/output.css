@@ -578,6 +578,10 @@ video {
   margin-inline-end: 0.625rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .block {
   display: block;
 }

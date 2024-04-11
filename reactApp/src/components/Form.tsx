@@ -11,7 +11,7 @@ export const Form = ({ children, onSubmit, nextStep, ...props }) => {
     };
 
     return (
-        <form className="row" onSubmit={onSubmitCustom} {...props} noValidate>
+        <form className="mb-6" onSubmit={onSubmitCustom} {...props} noValidate>
             {children}
         </form>
     );

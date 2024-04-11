@@ -36,7 +36,7 @@ function PersonalDetails() {
             <Stepper step={step} />
             <Form onSubmit={handleSubmit(saveData)}>
                 <fieldset>
-                    <legend>Contact</legend>
+                    <legend>Personal Details</legend>
                     <Field label="First name" error={errors?.name}>
                         <Input
                             {...register("donorFirstName", { required: "First name is required" })}

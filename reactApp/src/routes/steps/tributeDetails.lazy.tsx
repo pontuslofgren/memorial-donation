@@ -35,7 +35,7 @@ function TributeDetails() {
             <Stepper step={step} />
             <Form onSubmit={handleSubmit(saveData)}>
                 <fieldset>
-                    <legend>Contact</legend>
+                    <legend>Honoree details</legend>
                     <Field label="Honoree name" error={errors?.honoreeName}>
                         <Input
                             {...register("honoreeName", { required: "Honoree name is required" })}
