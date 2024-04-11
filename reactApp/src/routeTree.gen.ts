@@ -20,6 +20,7 @@ const SuccessLazyImport = createFileRoute('/success')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 const StepsTributeDetailsLazyImport = createFileRoute('/steps/tributeDetails')()
+const StepsPreviewLazyImport = createFileRoute('/steps/preview')()
 const StepsPersonalDetailsLazyImport = createFileRoute(
   '/steps/personalDetails',
 )()
@@ -48,6 +49,11 @@ const StepsTributeDetailsLazyRoute = StepsTributeDetailsLazyImport.update({
 } as any).lazy(() =>
   import('./routes/steps/tributeDetails.lazy').then((d) => d.Route),
 )
+
+const StepsPreviewLazyRoute = StepsPreviewLazyImport.update({
+  path: '/steps/preview',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/steps/preview.lazy').then((d) => d.Route))
 
 const StepsPersonalDetailsLazyRoute = StepsPersonalDetailsLazyImport.update({
   path: '/steps/personalDetails',
@@ -87,6 +93,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StepsPersonalDetailsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/steps/preview': {
+      preLoaderRoute: typeof StepsPreviewLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/steps/tributeDetails': {
       preLoaderRoute: typeof StepsTributeDetailsLazyImport
       parentRoute: typeof rootRoute
@@ -102,6 +112,7 @@ export const routeTree = rootRoute.addChildren([
   SuccessLazyRoute,
   StepsPaymentDetailsLazyRoute,
   StepsPersonalDetailsLazyRoute,
+  StepsPreviewLazyRoute,
   StepsTributeDetailsLazyRoute,
 ])
 

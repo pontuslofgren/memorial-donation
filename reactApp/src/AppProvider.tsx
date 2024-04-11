@@ -18,7 +18,9 @@ export function AppProvider({ children }) {
     return (
         <Elements stripe={stripePromise} options={options}>
             <AppStateContext.Provider value={value}>
-                {children}
+                <div className="px-3">
+                    {children}
+                </div>
             </AppStateContext.Provider>
         </Elements>
     );

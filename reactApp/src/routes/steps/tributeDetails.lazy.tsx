@@ -27,7 +27,7 @@ function TributeDetails() {
     const saveData = (data) => {
         console.log("Hello")
         setState({ ...state, ...data });
-        navigate({ to: '/steps/personalDetails' });
+        navigate({ to: '/steps/preview' });
     };
 
     return (
@@ -57,7 +57,7 @@ function TributeDetails() {
                         />
                     </Field>
 
-                    <Button>Next {">"}</Button>
+                    <Button>Continue</Button>
                 </fieldset>
             </Form>
         </>

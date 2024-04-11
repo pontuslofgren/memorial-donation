@@ -58,7 +58,7 @@ function PersonalDetails() {
                         />
                     </Field>
 
-                    <Button>Next {">"}</Button>
+                    <Button>Continue</Button>
                 </fieldset>
             </Form>
         </>
