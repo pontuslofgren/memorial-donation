@@ -19,6 +19,12 @@ import { Route as rootRoute } from './routes/__root'
 const SuccessLazyImport = createFileRoute('/success')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
+const StepsTributeDetailsLazyImport = createFileRoute('/steps/tributeDetails')()
+const StepsPreviewLazyImport = createFileRoute('/steps/preview')()
+const StepsPersonalDetailsLazyImport = createFileRoute(
+  '/steps/personalDetails',
+)()
+const StepsPaymentDetailsLazyImport = createFileRoute('/steps/paymentDetails')()
 
 // Create/Update Routes
 
@@ -37,6 +43,32 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const StepsTributeDetailsLazyRoute = StepsTributeDetailsLazyImport.update({
+  path: '/steps/tributeDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/tributeDetails.lazy').then((d) => d.Route),
+)
+
+const StepsPreviewLazyRoute = StepsPreviewLazyImport.update({
+  path: '/steps/preview',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/steps/preview.lazy').then((d) => d.Route))
+
+const StepsPersonalDetailsLazyRoute = StepsPersonalDetailsLazyImport.update({
+  path: '/steps/personalDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/personalDetails.lazy').then((d) => d.Route),
+)
+
+const StepsPaymentDetailsLazyRoute = StepsPaymentDetailsLazyImport.update({
+  path: '/steps/paymentDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/paymentDetails.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -53,6 +85,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SuccessLazyImport
       parentRoute: typeof rootRoute
     }
+    '/steps/paymentDetails': {
+      preLoaderRoute: typeof StepsPaymentDetailsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/steps/personalDetails': {
+      preLoaderRoute: typeof StepsPersonalDetailsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/steps/preview': {
+      preLoaderRoute: typeof StepsPreviewLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/steps/tributeDetails': {
+      preLoaderRoute: typeof StepsTributeDetailsLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -62,6 +110,10 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AboutLazyRoute,
   SuccessLazyRoute,
+  StepsPaymentDetailsLazyRoute,
+  StepsPersonalDetailsLazyRoute,
+  StepsPreviewLazyRoute,
+  StepsTributeDetailsLazyRoute,
 ])
 
 /* prettier-ignore-end */
