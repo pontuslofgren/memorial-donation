@@ -6,6 +6,7 @@ import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { StripeError } from "@stripe/stripe-js";
 import { useState } from 'react';
 import { MemorialFormInput } from '../../memorialForm/types';
+import { Stepper } from '../../components/Stepper';
 
 export const Route = createLazyFileRoute('/steps/paymentDetails')({
     component: PaymentDetails,
@@ -13,6 +14,7 @@ export const Route = createLazyFileRoute('/steps/paymentDetails')({
 
 function PaymentDetails() {
     const [state] = useAppState();
+    const step = 3;
     console.log(state);
     const { handleSubmit } = useForm({ defaultValues: state, mode: "onSubmit" });
 
@@ -80,12 +82,15 @@ function PaymentDetails() {
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <fieldset>
-                <PaymentElement />
-                <button type="submit" disabled={!stripe || loading} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Make donation</button>
-                {errorMessage && <div>{errorMessage}</div>}
-            </fieldset>
-        </Form>
+        <>
+            <Stepper step={step} />
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <fieldset>
+                    <PaymentElement />
+                    <button type="submit" disabled={!stripe || loading} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Make donation</button>
+                    {errorMessage && <div>{errorMessage}</div>}
+                </fieldset>
+            </Form>
+        </>
     );
 }

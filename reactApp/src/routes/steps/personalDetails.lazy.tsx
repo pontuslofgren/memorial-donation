@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '../../components/Form'
 import { Button } from '../../components/Button';
 import { personalDetailsFormInput } from '../../memorialForm/types';
+import { Stepper } from '../../components/Stepper';
 
 export const Route = createLazyFileRoute('/steps/personalDetails')({
     component: PersonalDetails,
@@ -13,6 +14,7 @@ export const Route = createLazyFileRoute('/steps/personalDetails')({
 
 function PersonalDetails() {
     const [state, setState] = useAppState();
+    const step = 2;
     console.log(state);
     const {
         handleSubmit,
@@ -30,32 +32,35 @@ function PersonalDetails() {
     };
 
     return (
-        <Form onSubmit={handleSubmit(saveData)}>
-            <fieldset>
-                <legend>Contact</legend>
-                <Field label="First name" error={errors?.name}>
-                    <Input
-                        {...register("donorFirstName", { required: "First name is required" })}
-                        id="donorFirstName"
-                    />
-                </Field>
+        <>
+            <Stepper step={step} />
+            <Form onSubmit={handleSubmit(saveData)}>
+                <fieldset>
+                    <legend>Contact</legend>
+                    <Field label="First name" error={errors?.name}>
+                        <Input
+                            {...register("donorFirstName", { required: "First name is required" })}
+                            id="donorFirstName"
+                        />
+                    </Field>
 
-                <Field label="Last name" error={errors?.donorLastName}>
-                    <Input
-                        {...register("donorLastname", { required: "Last name is required" })}
-                        id="donorLastName"
-                    />
-                </Field>
+                    <Field label="Last name" error={errors?.donorLastName}>
+                        <Input
+                            {...register("donorLastname", { required: "Last name is required" })}
+                            id="donorLastName"
+                        />
+                    </Field>
 
-                <Field label="Email" error={errors?.email}>
-                    <Input
-                        {...register("email", { required: "Email is required" })}
-                        id="email"
-                    />
-                </Field>
+                    <Field label="Email" error={errors?.email}>
+                        <Input
+                            {...register("email", { required: "Email is required" })}
+                            id="email"
+                        />
+                    </Field>
 
-                <Button>Next {">"}</Button>
-            </fieldset>
-        </Form>
+                    <Button>Next {">"}</Button>
+                </fieldset>
+            </Form>
+        </>
     );
 }

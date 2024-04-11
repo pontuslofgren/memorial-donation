@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '../../components/Form'
 import { Button } from '../../components/Button';
 import { tributeDetailsFormInput } from '../../memorialForm/types';
+import { Stepper } from '../../components/Stepper';
 
 export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
     component: TributeDetails,
@@ -13,6 +14,7 @@ export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
 
 function TributeDetails() {
     const [state, setState] = useAppState();
+    const step = 1;
     const {
         handleSubmit,
         register,
@@ -29,32 +31,35 @@ function TributeDetails() {
     };
 
     return (
-        <Form onSubmit={handleSubmit(saveData)}>
-            <fieldset>
-                <legend>Contact</legend>
-                <Field label="Honoree name" error={errors?.honoreeName}>
-                    <Input
-                        {...register("honoreeName", { required: "Honoree name is required" })}
-                        id="honoreeName"
-                    />
-                </Field>
+        <>
+            <Stepper step={step} />
+            <Form onSubmit={handleSubmit(saveData)}>
+                <fieldset>
+                    <legend>Contact</legend>
+                    <Field label="Honoree name" error={errors?.honoreeName}>
+                        <Input
+                            {...register("honoreeName", { required: "Honoree name is required" })}
+                            id="honoreeName"
+                        />
+                    </Field>
 
-                <Field label="Message" error={errors?.message}>
-                    <Input
-                        {...register("message", { required: "Message is required" })}
-                        id="message"
-                    />
-                </Field>
+                    <Field label="Message" error={errors?.message}>
+                        <Input
+                            {...register("message", { required: "Message is required" })}
+                            id="message"
+                        />
+                    </Field>
 
-                <Field label="Amount" error={errors?.message}>
-                    <Input
-                        {...register("amount", { required: "Amount is required" })}
-                        id="amount" type="number"
-                    />
-                </Field>
+                    <Field label="Amount" error={errors?.message}>
+                        <Input
+                            {...register("amount", { required: "Amount is required" })}
+                            id="amount" type="number"
+                        />
+                    </Field>
 
-                <Button>Next {">"}</Button>
-            </fieldset>
-        </Form>
+                    <Button>Next {">"}</Button>
+                </fieldset>
+            </Form>
+        </>
     );
 }
