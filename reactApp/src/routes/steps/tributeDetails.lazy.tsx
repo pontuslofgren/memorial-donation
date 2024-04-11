@@ -17,6 +17,7 @@ export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
 function TributeDetails() {
     const [state, setState] = useAppState();
     const [customAmountVisible, setCustomAmountVisible] = useState<boolean>(false);
+    const [selectedAmount, setSelectedAmount] = useState("");
     const step = 1;
     const {
         handleSubmit,
@@ -31,8 +32,10 @@ function TributeDetails() {
         navigate({ to: '/steps/preview' });
     };
 
-    const toggleCustomAmount = () => {
-        setCustomAmountVisible(!customAmountVisible)
+    const toggleCustomAmount = (e) => {
+        const { value } = e.target;
+        setSelectedAmount(value);
+
     }
 
     return (
@@ -57,33 +60,41 @@ function TributeDetails() {
 
                     <Field label="Amount" error={errors?.message}>
                         <div>
-                            <label>
+                            <label for="100">
                                 <input
                                     type="radio"
                                     value="100"
+                                    name="amountRadio"
                                     {...register("amount")}
+                                    onChange={toggleCustomAmount}
+                                    checked={selectedAmount === "100"}
                                 />
                                 $100
                             </label>
-                            <label>
+                            <label for="500">
                                 <input
                                     type="radio"
                                     value="500"
+                                    name="amountRadio"
                                     {...register("amount")}
+                                    onChange={toggleCustomAmount}
+                                    checked={selectedAmount === "500"}
                                 />
                                 $500
                             </label>
-                            <label>
+                            <label for="custom">
                                 <input
                                     type="radio"
                                     value="custom"
+                                    name="amountRadio"
                                     onChange={toggleCustomAmount}
+                                    checked={selectedAmount === "custom"}
                                 />
                                 Custom
                             </label>
 
 
-                            {customAmountVisible && (
+                            {selectedAmount === "custom" && (
                                 <Input
                                     {...register("amount", { required: "Amount is required" })}
                                     id="amount" type="number"
