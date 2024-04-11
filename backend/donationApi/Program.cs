@@ -1,6 +1,8 @@
 using donationApi.Configs;
 using donationApi.Services;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DonationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DonationContext") ?? throw new InvalidOperationException("Connection string 'DonationContext' not found.")));
@@ -35,4 +37,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+QuestPDF.Settings.License = LicenseType.Community;
 app.Run();
+
