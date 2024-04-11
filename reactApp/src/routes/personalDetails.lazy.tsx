@@ -25,7 +25,7 @@ function PersonalDetails() {
     const saveData = (data) => {
         console.log("Hello")
         setState({ ...state, ...data });
-        navigate({ to: '/about' });
+        navigate({ to: 'paymentDetails' });
     };
 
     return (

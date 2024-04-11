@@ -19,7 +19,7 @@ import { Route as rootRoute } from './routes/__root'
 const TributeDetailsLazyImport = createFileRoute('/tributeDetails')()
 const SuccessLazyImport = createFileRoute('/success')()
 const PersonalDetailsLazyImport = createFileRoute('/personalDetails')()
-const PaymentLazyImport = createFileRoute('/payment')()
+const PaymentDetailsLazyImport = createFileRoute('/paymentDetails')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
@@ -44,10 +44,12 @@ const PersonalDetailsLazyRoute = PersonalDetailsLazyImport.update({
   import('./routes/personalDetails.lazy').then((d) => d.Route),
 )
 
-const PaymentLazyRoute = PaymentLazyImport.update({
-  path: '/payment',
+const PaymentDetailsLazyRoute = PaymentDetailsLazyImport.update({
+  path: '/paymentDetails',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/payment.lazy').then((d) => d.Route))
+} as any).lazy(() =>./routes/paymentDetails.lazy
+  import('./routes/paymentDetails.lazy').then((d) => d.Route),
+)
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -71,8 +73,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/payment': {
-      preLoaderRoute: typeof PaymentLazyImport
+    '/paymentDetails': {
+      preLoaderRoute: typeof PaymentDetailsLazyImport
       parentRoute: typeof rootRoute
     }
     '/personalDetails': {
@@ -95,7 +97,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AboutLazyRoute,
-  PaymentLazyRoute,
+  PaymentDetailsLazyRoute,
   PersonalDetailsLazyRoute,
   SuccessLazyRoute,
   TributeDetailsLazyRoute,
