@@ -39,9 +39,7 @@ public class TributeDocument : IDocument
     void ComposeHeader(IContainer container)
     {
         container
-            .AlignCenter()
-                .Text("Hello Salties!")
-                .FontSize(36);
+            .PaddingVertical(1, Unit.Centimetre);
     }
 
     void ComposeContent(IContainer container)
@@ -49,30 +47,30 @@ public class TributeDocument : IDocument
         container
             .PaddingVertical(1, Unit.Centimetre)
                 .Column(col =>
-                {
-                    col.Item().AlignCenter()
-                        .Padding(10)
-                        .Text("In Memory Of")
-                        .FontSize(20)
-                        .SemiBold();
+            {
+                col.Item().AlignCenter()
+                    .Padding(10)
+                    .Text("In Memory Of")
+                    .FontSize(30);
                     col.Item().AlignCenter()
                         .Padding(10)
                         .Text(_model.HonoreeName)
-                        .FontSize(40)
+                        .FontSize(50)
                         .SemiBold();
                     col.Item().AlignCenter()
                         .Padding(10)
                         .Text("Have we received a donation")
-                        .FontSize(20)
-                        .SemiBold();
+                        .FontSize(30);
                     col.Item().Height(100).AlignCenter()
                         .Padding(10)
                         .Image("Documents/Images/heart.png").FitHeight();
                     col.Item().AlignCenter()
                         .Padding(10)
-                        .Text(_model.Message)
-                        .FontSize(20)
-                        .SemiBold();
-                });
+                        .Text(text =>
+                        {
+                            text.AlignCenter();
+                            text.Span(_model.Message).FontSize(20);
+                        });
+            });
     }
 }
