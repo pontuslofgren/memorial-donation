@@ -8,6 +8,7 @@ import { Button } from '../../components/Button';
 import { tributeDetailsFormInput } from '../../memorialForm/types';
 import { Stepper } from '../../components/Stepper';
 import { Textarea } from '../../components/Textarea';
+import { useState } from 'react';
 
 export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
     component: TributeDetails,
@@ -15,21 +16,24 @@ export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
 
 function TributeDetails() {
     const [state, setState] = useAppState();
+    const [customAmountVisible, setCustomAmountVisible] = useState<boolean>(false);
     const step = 1;
     const {
         handleSubmit,
         register,
-        watch,
         formState: { errors },
     } = useForm<tributeDetailsFormInput>({ defaultValues: state, mode: "onSubmit" });
     // const watchPassword = watch("password");
     const navigate = useNavigate();
 
     const saveData = (data) => {
-        console.log("Hello")
         setState({ ...state, ...data });
         navigate({ to: '/steps/preview' });
     };
+
+    const toggleCustomAmount = () => {
+        setCustomAmountVisible(!customAmountVisible)
+    }
 
     return (
         <>
@@ -52,15 +56,46 @@ function TributeDetails() {
                     </Field>
 
                     <Field label="Amount" error={errors?.message}>
-                        <Input
-                            {...register("amount", { required: "Amount is required" })}
-                            id="amount" type="number"
-                        />
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="100"
+                                    {...register("amount")}
+                                />
+                                $100
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="500"
+                                    {...register("amount")}
+                                />
+                                $500
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="custom"
+                                    onChange={toggleCustomAmount}
+                                />
+                                Custom
+                            </label>
+
+
+                            {customAmountVisible && (
+                                <Input
+                                    {...register("amount", { required: "Amount is required" })}
+                                    id="amount" type="number"
+                                />
+                            )}
+
+                        </div>
                     </Field>
 
                     <Button>Continue</Button>
                 </fieldset>
-            </Form>
+            </Form >
         </>
     );
 }
