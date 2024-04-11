@@ -57,7 +57,7 @@ public class TributeDocument : IDocument
                         .SemiBold();
                     col.Item().AlignCenter()
                         .Padding(10)
-                        .Text(_model.Honoree)
+                        .Text(_model.HonoreeName)
                         .FontSize(40)
                         .SemiBold();
                     col.Item().AlignCenter()
@@ -67,7 +67,7 @@ public class TributeDocument : IDocument
                         .SemiBold();
                     col.Item().Height(100).AlignCenter()
                         .Padding(10)
-                        .Image("/Images/heart.png").FitHeight();
+                        .Image("Documents/Images/heart.png").FitHeight();
                     col.Item().AlignCenter()
                         .Padding(10)
                         .Text(_model.Message)
