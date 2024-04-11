@@ -1,12 +1,13 @@
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
-import { useAppState } from '../useAppState'
-import { Field } from '../components/Field';
-import { Input } from '../components/Input';
+import { useAppState } from '../../useAppState'
+import { Field } from '../../components/Field';
+import { Input } from '../../components/Input';
 import { useForm } from 'react-hook-form';
-import { Form } from '../components/Form'
-import { Button } from '../components/Button';
+import { Form } from '../../components/Form'
+import { Button } from '../../components/Button';
+import { personalDetailsFormInput } from '../../memorialForm/types';
 
-export const Route = createLazyFileRoute('/personalDetails')({
+export const Route = createLazyFileRoute('/steps/personalDetails')({
     component: PersonalDetails,
 })
 
@@ -18,24 +19,31 @@ function PersonalDetails() {
         register,
         watch,
         formState: { errors },
-    } = useForm({ defaultValues: state, mode: "onSubmit" });
+    } = useForm<personalDetailsFormInput>({ defaultValues: state, mode: "onSubmit" });
     // const watchPassword = watch("password");
     const navigate = useNavigate();
 
     const saveData = (data) => {
         console.log("Hello")
         setState({ ...state, ...data });
-        navigate({ to: 'paymentDetails' });
+        navigate({ to: '/paymentDetails' });
     };
 
     return (
         <Form onSubmit={handleSubmit(saveData)}>
             <fieldset>
                 <legend>Contact</legend>
-                <Field label="Name" error={errors?.name}>
+                <Field label="First name" error={errors?.name}>
                     <Input
-                        {...register("name", { required: "Name is required" })}
-                        id="name"
+                        {...register("donorFirstName", { required: "First name is required" })}
+                        id="donorFirstName"
+                    />
+                </Field>
+
+                <Field label="Last name" error={errors?.donorLastName}>
+                    <Input
+                        {...register("donorLastname", { required: "Last name is required" })}
+                        id="donorLastName"
                     />
                 </Field>
 

@@ -16,40 +16,21 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const TributeDetailsLazyImport = createFileRoute('/tributeDetails')()
 const SuccessLazyImport = createFileRoute('/success')()
-const PersonalDetailsLazyImport = createFileRoute('/personalDetails')()
-const PaymentDetailsLazyImport = createFileRoute('/paymentDetails')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
+const StepsTributeDetailsLazyImport = createFileRoute('/steps/tributeDetails')()
+const StepsPersonalDetailsLazyImport = createFileRoute(
+  '/steps/personalDetails',
+)()
+const StepsPaymentDetailsLazyImport = createFileRoute('/steps/paymentDetails')()
 
 // Create/Update Routes
-
-const TributeDetailsLazyRoute = TributeDetailsLazyImport.update({
-  path: '/tributeDetails',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/tributeDetails.lazy').then((d) => d.Route),
-)
 
 const SuccessLazyRoute = SuccessLazyImport.update({
   path: '/success',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/success.lazy').then((d) => d.Route))
-
-const PersonalDetailsLazyRoute = PersonalDetailsLazyImport.update({
-  path: '/personalDetails',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/personalDetails.lazy').then((d) => d.Route),
-)
-
-const PaymentDetailsLazyRoute = PaymentDetailsLazyImport.update({
-  path: '/paymentDetails',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>./routes/paymentDetails.lazy
-  import('./routes/paymentDetails.lazy').then((d) => d.Route),
-)
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -60,6 +41,27 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const StepsTributeDetailsLazyRoute = StepsTributeDetailsLazyImport.update({
+  path: '/steps/tributeDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/tributeDetails.lazy').then((d) => d.Route),
+)
+
+const StepsPersonalDetailsLazyRoute = StepsPersonalDetailsLazyImport.update({
+  path: '/steps/personalDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/personalDetails.lazy').then((d) => d.Route),
+)
+
+const StepsPaymentDetailsLazyRoute = StepsPaymentDetailsLazyImport.update({
+  path: '/steps/paymentDetails',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/steps/paymentDetails.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -73,20 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/paymentDetails': {
-      preLoaderRoute: typeof PaymentDetailsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/personalDetails': {
-      preLoaderRoute: typeof PersonalDetailsLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/success': {
       preLoaderRoute: typeof SuccessLazyImport
       parentRoute: typeof rootRoute
     }
-    '/tributeDetails': {
-      preLoaderRoute: typeof TributeDetailsLazyImport
+    '/steps/paymentDetails': {
+      preLoaderRoute: typeof StepsPaymentDetailsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/steps/personalDetails': {
+      preLoaderRoute: typeof StepsPersonalDetailsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/steps/tributeDetails': {
+      preLoaderRoute: typeof StepsTributeDetailsLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -97,10 +99,10 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AboutLazyRoute,
-  PaymentDetailsLazyRoute,
-  PersonalDetailsLazyRoute,
   SuccessLazyRoute,
-  TributeDetailsLazyRoute,
+  StepsPaymentDetailsLazyRoute,
+  StepsPersonalDetailsLazyRoute,
+  StepsTributeDetailsLazyRoute,
 ])
 
 /* prettier-ignore-end */
