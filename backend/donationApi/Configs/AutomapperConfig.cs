@@ -11,6 +11,7 @@ public class AutomapperConfig : Profile
     {
         CreateMap<MemorialDonationRequest, MemorialDonation>().ReverseMap();
         CreateMap<MemorialDonationResponse, MemorialDonation>().ReverseMap();
+        CreateMap<MemorialDonation, TributePdf>();
         CreateMap<MemorialDonation, EmailTemplateRequest>()
             .ForMember(dest => dest.Params,
                 opt => opt.MapFrom(src => new EmailTemplateRequest.ParamsRecord { FNAME = src.DonorFirstName }))
