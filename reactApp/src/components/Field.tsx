@@ -6,7 +6,7 @@ import { FieldError } from "react-hook-form";
 type Props = {
     children: ReactElement;
     label: string;
-    error: FieldError;
+    error: FieldError | undefined;
 }
 
 export const Field = ({ children, label, error }: Props) => {
