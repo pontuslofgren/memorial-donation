@@ -58,7 +58,7 @@ function TributeDetails() {
 
                     <Field label="Amount" error={errors?.message}>
                         <div className="grid grid-cols-3 gap-3">
-                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
                                         required: selectedAmount !== "custom" ? "Amount is required" : undefined,
@@ -76,7 +76,7 @@ function TributeDetails() {
                                     SEK 150
                                 </label>
                             </div>
-                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
                                         required: selectedAmount !== "custom" ? "Amount is required" : undefined,
@@ -94,7 +94,7 @@ function TributeDetails() {
                                     SEK 500
                                 </label>
                             </div>
-                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
                                         required: selectedAmount !== "custom" ? "Amount is required" : undefined,
@@ -112,7 +112,7 @@ function TributeDetails() {
                                     SEK 1 000
                                 </label>
                             </div>
-                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "custom"}
@@ -134,7 +134,7 @@ function TributeDetails() {
                                     type="number"
                                     id="amount"
                                     placeholder="Enter custom amount"
-                                    className="col-span-2 justify-center items-center px-4 border border-gray-200 mb-2 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    className="shadow-sm col-span-2 justify-center items-center px-4 border border-gray-200 mb-2 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                             )}
 
                         </div>
