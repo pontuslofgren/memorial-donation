@@ -8,9 +8,9 @@ import { Button } from '../../components/Button';
 import { tributeDetailsFormInput } from '../../memorialForm/types';
 import { Stepper } from '../../components/Stepper';
 import { Textarea } from '../../components/Textarea';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-export const Route = createLazyFileRoute('/tributeDetails/lazy copy')({
+export const Route = createLazyFileRoute('/steps/tributeDetails')({
     component: TributeDetails,
 })
 
@@ -26,15 +26,14 @@ function TributeDetails() {
     // const watchPassword = watch("password");
     const navigate = useNavigate();
 
-    const saveData = (data) => {
+    const saveData = (data: tributeDetailsFormInput) => {
         setState({ ...state, ...data });
         navigate({ to: '/steps/preview' });
     };
 
-    const toggleCustomAmount = (e) => {
+    const toggleCustomAmount = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setSelectedAmount(value);
-
     }
 
     return (
@@ -135,7 +134,7 @@ function TributeDetails() {
                                     type="number"
                                     id="amount"
                                     placeholder="Enter custom amount"
-                                    className="col-span-2 flex justify-center items-center px-4 border border-gray-200 rounded mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    className="col-span-2 justify-center items-center px-4 border border-gray-200 mb-2 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                             )}
 
                         </div>
