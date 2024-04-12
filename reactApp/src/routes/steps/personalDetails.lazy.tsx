@@ -23,7 +23,6 @@ function PersonalDetails() {
     const navigate = useNavigate();
 
     const saveData = (data: personalDetailsFormInput) => {
-        console.log("Hello")
         setState({ ...state, ...data });
         navigate({ to: '/steps/paymentDetails' });
     };
