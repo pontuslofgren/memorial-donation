@@ -1,6 +1,5 @@
 using donationApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using donationApi.Models;
 using donationApi.Services;
 using Stripe;
 
@@ -48,34 +47,22 @@ namespace donationApi.Controllers
             try
             {
                 var stripeEvent = EventUtility.ParseEvent(json);
-
-                // Handle the event
+                
                 if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-                    await _donationService.HandlePaymentSuccess(paymentIntent.ClientSecret);
-                    // await _donationService.SetDonationStatusToSucceeded(paymentIntent.ClientSecret);
-                    // await _donationService.SendTributeEmail(paymentIntent.ClientSecret);
-                    // Then define and call a method to handle the successful payment intent.
-                    // handlePaymentIntentSucceeded(paymentIntent);
+                    await _donationService.HandlePaymentSuccess(paymentIntent!.ClientSecret);
                 }
                 else
                 {
-                    // Unexpected event type
                     Console.WriteLine("Unhandled event type: {0}", stripeEvent.Type);
                 }
                 return Ok();
             }
             catch (StripeException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<MemorialDonationResponse>> GetDonation(Guid guid)
-        {
-            throw new NotImplementedException();
         }
     }
 }
