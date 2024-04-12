@@ -34,6 +34,7 @@ function PersonalDetails() {
     return (
         <>
             <Stepper step={step} />
+            <h2 className="text-xl mb-3 font-semibold">Personal details</h2>
             <Form onSubmit={handleSubmit(saveData)}>
                 <fieldset>
                     <legend>Personal Details</legend>

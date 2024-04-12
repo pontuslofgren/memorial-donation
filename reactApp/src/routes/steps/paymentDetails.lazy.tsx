@@ -85,6 +85,7 @@ function PaymentDetails() {
     return (
         <>
             <Stepper step={step} />
+            <h2 className="text-xl mb-3 font-semibold">Payment</h2>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset>
                     <PaymentElement />

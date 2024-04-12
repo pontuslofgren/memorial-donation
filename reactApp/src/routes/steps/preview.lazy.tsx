@@ -32,7 +32,7 @@ export function Preview() {
     return (
         <>
             <Stepper step={step} />
-
+            <h2 className="text-xl mb-3 font-semibold">Tribute eCard preview</h2>
             <div className="shadow w-96 mx-auto h-[500px] pt-16 px-5 border rounded-lg mb-6">
                 <p className="text-center text-lg">In Memory Of</p>
                 <p className="text-center font-bold text-3xl">{state.honoreeName}</p>
