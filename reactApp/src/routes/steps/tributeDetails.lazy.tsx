@@ -59,13 +59,13 @@ function TributeDetails() {
                     </Field>
 
                     <Field label="Amount" error={errors?.message}>
-                        <div>
+                        <div className="h-14">
                             <label for="100">
                                 <input
                                     type="radio"
                                     value="100"
                                     name="amountRadio"
-                                    {...register("amount")}
+                                    {...(selectedAmount !== "custom" && register("amount", { required: "Amount is required" }))}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "100"}
                                 />
@@ -76,7 +76,7 @@ function TributeDetails() {
                                     type="radio"
                                     value="500"
                                     name="amountRadio"
-                                    {...register("amount")}
+                                    {...(selectedAmount !== "custom" && register("amount", { required: "Amount is required" }))}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "500"}
                                 />
@@ -94,13 +94,12 @@ function TributeDetails() {
                             </label>
 
 
-                            <Input isHidden={selectedAmount != "custom"}
-                                {...register("amount", { required: "Amount is required" })}
-                                id="amount" type="number"
-                            />
-
-
-
+                            {selectedAmount === "custom" && (
+                                <Input
+                                    {...register("amount", { required: "Amount is required" })}
+                                    id="amount" type="number"
+                                />
+                            )}
 
                         </div>
                     </Field>
