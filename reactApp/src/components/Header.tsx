@@ -5,7 +5,7 @@ export function Header() {
                 <div
                     className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
                 >
-                    <h1 className="text-4xl font-bold">Logo</h1>
+                    <h1 className="text-4xl font-bold"><a href="/steps/tributeDetails">Logo</a></h1>
                     <button
                         data-collapse-toggle="navbar-default"
                         type="button"
