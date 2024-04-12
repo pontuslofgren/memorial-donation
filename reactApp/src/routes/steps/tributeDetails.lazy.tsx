@@ -94,12 +94,13 @@ function TributeDetails() {
                             </label>
 
 
-                            {selectedAmount === "custom" && (
-                                <Input
-                                    {...register("amount", { required: "Amount is required" })}
-                                    id="amount" type="number"
-                                />
-                            )}
+                            <Input isHidden={selectedAmount != "custom"}
+                                {...register("amount", { required: "Amount is required" })}
+                                id="amount" type="number"
+                            />
+
+
+
 
                         </div>
                     </Field>
