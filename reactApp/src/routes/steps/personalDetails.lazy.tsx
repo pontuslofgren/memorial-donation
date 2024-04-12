@@ -5,7 +5,7 @@ import { Input } from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import { Form } from '../../components/Form'
 import { Button } from '../../components/Button';
-import { personalDetailsFormInput } from '../../memorialForm/types';
+import { MemorialFormInput, personalDetailsFormInput, tributeDetailsFormInput } from '../../memorialForm/types';
 import { Stepper } from '../../components/Stepper';
 
 export const Route = createLazyFileRoute('/steps/personalDetails')({
@@ -15,17 +15,14 @@ export const Route = createLazyFileRoute('/steps/personalDetails')({
 function PersonalDetails() {
     const [state, setState] = useAppState();
     const step = 3;
-    console.log(state);
     const {
         handleSubmit,
         register,
-        watch,
         formState: { errors },
     } = useForm<personalDetailsFormInput>({ defaultValues: state, mode: "onSubmit" });
-    // const watchPassword = watch("password");
     const navigate = useNavigate();
 
-    const saveData = (data) => {
+    const saveData = (data: personalDetailsFormInput) => {
         console.log("Hello")
         setState({ ...state, ...data });
         navigate({ to: '/steps/paymentDetails' });
@@ -37,8 +34,7 @@ function PersonalDetails() {
             <h2 className="text-xl mb-3 font-semibold">Personal details</h2>
             <Form onSubmit={handleSubmit(saveData)}>
                 <fieldset>
-                    <legend>Personal Details</legend>
-                    <Field label="First name" error={errors?.name}>
+                    <Field label="First name" error={errors?.donorFirstName}>
                         <Input
                             {...register("donorFirstName", { required: "First name is required" })}
                             id="donorFirstName"
