@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { useAppState } from "./useAppState";
 import { Elements } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js"
 import { Header } from "./components/Header";
@@ -27,9 +26,6 @@ export function AppProvider({ children }) {
                     fontSize: '0.9rem'
                 }
             }
-
-
-
         }
     }
 
