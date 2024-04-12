@@ -16,12 +16,9 @@ export const Route = createLazyFileRoute('/steps/paymentDetails')({
 function PaymentDetails() {
     const [state] = useAppState();
     const step = 4;
-    console.log(state);
     const { handleSubmit } = useForm({ defaultValues: state, mode: "onSubmit" });
 
     const onSubmit: SubmitHandler<MemorialFormInput> = (data) => {
-        console.log(data);
-        console.log(state);
         processPayment(data);
     }
 
