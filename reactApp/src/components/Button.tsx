@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 type Props = {
     children: ReactElement | string;
     variant?: string;
+    disabled?: boolean;
     onClick?: () => void;
 }
 
