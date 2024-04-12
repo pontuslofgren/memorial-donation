@@ -72,5 +72,4 @@ public class DonationService : IDonationService
         return await _context.Donations
             .FirstOrDefaultAsync(donation => donation.ClientSecret == clientSecret);
     }
-    
 }
