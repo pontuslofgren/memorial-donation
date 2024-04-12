@@ -40,9 +40,9 @@ function TributeDetails() {
     return (
         <>
             <Stepper step={step} />
+            <h2 className="text-xl mb-3 font-semibold">Honoree details</h2>
             <Form onSubmit={handleSubmit(saveData)}>
                 <fieldset>
-                    <legend>Honoree details</legend>
                     <Field label="Honoree name" error={errors?.honoreeName}>
                         <Input
                             {...register("honoreeName", { required: "Honoree name is required" })}
