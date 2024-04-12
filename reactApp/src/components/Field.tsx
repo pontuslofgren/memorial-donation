@@ -1,8 +1,15 @@
 // Forms/Field.js
 
-import React from "react";
+import React, { ReactElement } from "react";
+import { FieldError } from "react-hook-form";
 
-export const Field = ({ children, label, error }) => {
+type Props = {
+    children: ReactElement;
+    label: string;
+    error: FieldError;
+}
+
+export const Field = ({ children, label, error }: Props) => {
     const id = getChildId(children);
 
     return (
@@ -17,7 +24,7 @@ export const Field = ({ children, label, error }) => {
 };
 
 // Get id prop from a child element
-export const getChildId = (children) => {
+export const getChildId = (children: ReactElement) => {
     const child = React.Children.only(children);
 
     if ("id" in child?.props) {

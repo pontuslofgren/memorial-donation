@@ -13,6 +13,24 @@ export function AppProvider({ children }) {
         mode: 'payment',
         currency: 'sek',
         amount: 20000,
+        appearance: {
+            theme: 'stripe',
+            variables: {
+                fontSizeBase: "14px"
+            },
+            rules: {
+                '.Label': {
+                    fontWeight: '600',
+                    color: '#111827'
+                },
+                '.Input::placeholder': {
+                    fontSize: '0.9rem'
+                }
+            }
+
+
+
+        }
     }
 
     const value = useState({});
