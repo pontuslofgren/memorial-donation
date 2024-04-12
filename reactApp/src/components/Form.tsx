@@ -1,17 +1,12 @@
-import { useNavigate } from '@tanstack/react-router'
+type Props = {
+    children: React.ReactElement;
+    onSubmit: () => void;
+}
 
-
-export const Form = ({ children, onSubmit, nextStep, ...props }) => {
-    const navigate = useNavigate();
-
-    const onSubmitCustom = (e) => {
-        e.preventDefault();
-        onSubmit();
-        navigate(nextStep);
-    };
+export const Form = ({ children, onSubmit, ...props }: Props) => {
 
     return (
-        <form className="mb-6" onSubmit={onSubmitCustom} {...props} noValidate>
+        <form className="mb-6" onSubmit={onSubmit} {...props} noValidate>
             {children}
         </form>
     );
