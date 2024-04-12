@@ -5,7 +5,7 @@ import { Input } from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import { Form } from '../../components/Form'
 import { Button } from '../../components/Button';
-import { MemorialFormInput, personalDetailsFormInput, tributeDetailsFormInput } from '../../memorialForm/types';
+import { personalDetailsFormInput } from '../../memorialForm/types';
 import { Stepper } from '../../components/Stepper';
 
 export const Route = createLazyFileRoute('/steps/personalDetails')({
@@ -43,7 +43,7 @@ function PersonalDetails() {
 
                     <Field label="Last name" error={errors?.donorLastName}>
                         <Input
-                            {...register("donorLastname", { required: "Last name is required" })}
+                            {...register("donorLastName", { required: "Last name is required" })}
                             id="donorLastName"
                         />
                     </Field>
