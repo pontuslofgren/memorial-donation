@@ -1,11 +1,10 @@
-using System.Buffers.Text;
 using donationApi.Documents;
 using donationApi.Models;
 using QuestPDF.Fluent;
 
-namespace donationApi.Services;
+namespace donationApi.Helpers;
 
-public static class PdfGeneratorService
+public static class PdfGeneratorHelper
 {
     public static string GenerateTributePdf(TributePdf tribute)
     {

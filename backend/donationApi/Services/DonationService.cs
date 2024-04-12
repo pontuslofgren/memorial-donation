@@ -2,6 +2,7 @@ using System.Data.Common;
 using AutoMapper;
 using donationApi.DTO;
 using donationApi.DTOs;
+using donationApi.Helpers;
 using donationApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
@@ -39,7 +40,7 @@ public class DonationService : IDonationService
         }
         
         await SetDonationStatusToSucceeded(donation);
-        var pdf = PdfGeneratorService.GenerateTributePdf(_mapper.Map<TributePdf>(donation));
+        var pdf = PdfGeneratorHelper.GenerateTributePdf(_mapper.Map<TributePdf>(donation));
         await SendTributeEmail(donation, pdf);
     }
     
