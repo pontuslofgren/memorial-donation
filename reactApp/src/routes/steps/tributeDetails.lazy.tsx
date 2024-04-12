@@ -59,46 +59,73 @@ function TributeDetails() {
                     </Field>
 
                     <Field label="Amount" error={errors?.message}>
-                        <div className="h-14">
-                            <label for="100">
+                        <div className="grid grid-cols-3 gap-3">
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
                                 <input
-                                    type="radio"
-                                    value="100"
-                                    name="amountRadio"
                                     {...(selectedAmount !== "custom" && register("amount", { required: "Amount is required" }))}
                                     onChange={toggleCustomAmount}
-                                    checked={selectedAmount === "100"}
-                                />
-                                $100
-                            </label>
-                            <label for="500">
-                                <input
+                                    checked={selectedAmount === "150"}
+                                    value="150"
+                                    id="bordered-radio-150"
                                     type="radio"
-                                    value="500"
-                                    name="amountRadio"
+                                    name="bordered-radio"
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                <label
+                                    htmlFor="bordered-radio-150"
+                                    className="w-full py-4 ms-2 text-sm font-medium text-gray-900">
+                                    SEK 150
+                                </label>
+                            </div>
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                                <input
                                     {...(selectedAmount !== "custom" && register("amount", { required: "Amount is required" }))}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "500"}
-                                />
-                                $500
-                            </label>
-                            <label for="custom">
-                                <input
+                                    value="500"
+                                    id="bordered-radio-500"
                                     type="radio"
-                                    value="custom"
-                                    name="amountRadio"
+                                    name="bordered-radio"
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                <label
+                                    htmlFor="bordered-radio-500"
+                                    className="w-full py-4 ms-2 text-sm font-medium text-gray-900">
+                                    SEK 500
+                                </label>
+                            </div>
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                                <input
+                                    {...(selectedAmount !== "custom" && register("amount", { required: "Amount is required" }))}
+                                    onChange={toggleCustomAmount}
+                                    checked={selectedAmount === "1000"}
+                                    value="1000"
+                                    id="bordered-radio-1000"
+                                    type="radio"
+                                    name="bordered-radio"
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                <label
+                                    htmlFor="bordered-radio-1000"
+                                    className="w-full py-4 ms-2 text-sm font-medium text-gray-900">
+                                    SEK 1 000
+                                </label>
+                            </div>
+                            <div className="flex items-center ps-4 border border-gray-200 rounded mb-2">
+                                <input
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "custom"}
-                                />
-                                Custom
-                            </label>
-
+                                    id="bordered-radio-custom"
+                                    type="radio"
+                                    value="custom"
+                                    name="bordered-radio"
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" />
+                                <label
+                                    htmlFor="bordered-radio-custom"
+                                    className="w-full py-4 ms-2 text-sm font-medium text-gray-900">
+                                    Custom amount
+                                </label>
+                            </div>
 
                             {selectedAmount === "custom" && (
-                                <Input
-                                    {...register("amount", { required: "Amount is required" })}
-                                    id="amount" type="number"
-                                />
+                                <input type="number" id="amount" placeholder="Enter custom amount" className="col-span-2 flex justify-center items-center px-4 border border-gray-200 rounded mb-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                             )}
 
                         </div>
