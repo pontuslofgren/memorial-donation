@@ -1,8 +1,7 @@
 import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
 import { Stepper } from '../../components/Stepper'
 import { useAppState } from '../../useAppState';
-import { useForm } from 'react-hook-form';
-import { MemorialFormInput, tributeDetailsFormInput } from '../../memorialForm/types';
+import { MemorialFormInput } from '../../memorialForm/types';
 import heart from '../../assets/heart.png';
 import { Button } from '../../components/Button';
 
