@@ -13,12 +13,6 @@ export const Route = createLazyFileRoute('/steps/preview')({
 export function Preview() {
     const [state] = useAppState<MemorialFormInput>();
     const step = 2;
-    const {
-        handleSubmit,
-        register,
-        watch,
-        formState: { errors },
-    } = useForm<tributeDetailsFormInput>({ defaultValues: state, mode: "onSubmit" });
     const navigate = useNavigate();
 
     function nextStep() {
