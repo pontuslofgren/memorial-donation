@@ -1,7 +1,7 @@
 export function Header() {
     return (
         <>
-            <nav className="bg-white border-gray-20 bg-slate-50">
+            <nav className="border-gray-20 bg-slate-50">
                 <div
                     className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
                 >
