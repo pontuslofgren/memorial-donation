@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 type Props = {
     children: ReactElement | string;
     variant?: string;
+    onClick?: () => void;
 }
 
 export const Button = (
