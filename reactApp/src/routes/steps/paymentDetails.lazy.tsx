@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useNavigate } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { useAppState } from '../../useAppState'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Form } from '../../components/Form'
@@ -70,7 +70,6 @@ function PaymentDetails() {
             elements: elements ? elements : undefined,
             clientSecret,
             confirmParams: {
-                // TODO: create success route and add return url
                 return_url: 'https://localhost:5173/success',
             },
         });
