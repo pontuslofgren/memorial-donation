@@ -61,7 +61,7 @@ function TributeDetails() {
                             <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
-                                        required: selectedAmount !== "custom" ? "Amount is required" : undefined,
+                                        required: selectedAmount != "custom" ? "Amount is required" : undefined,
                                     })}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "150"}
@@ -79,7 +79,7 @@ function TributeDetails() {
                             <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
-                                        required: selectedAmount !== "custom" ? "Amount is required" : undefined,
+                                        required: selectedAmount != "custom" ? "Amount is required" : undefined,
                                     })}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "500"}
@@ -97,7 +97,7 @@ function TributeDetails() {
                             <div className="flex items-center ps-4 border border-gray-200 rounded mb-2 shadow-sm">
                                 <input
                                     {...register("amount", {
-                                        required: selectedAmount !== "custom" ? "Amount is required" : undefined,
+                                        required: selectedAmount != "custom" ? "Amount is required" : undefined,
                                     })}
                                     onChange={toggleCustomAmount}
                                     checked={selectedAmount === "1000"}
