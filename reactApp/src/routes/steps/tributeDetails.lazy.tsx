@@ -134,7 +134,7 @@ function TributeDetails() {
                                     type="number"
                                     id="amount"
                                     placeholder="Enter custom amount"
-                                    className="shadow-sm col-span-2 justify-center items-center px-4 border border-gray-200 mb-2 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    className="text-base shadow-sm col-span-2 justify-center items-center px-4 border border-gray-200 mb-2 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                             )}
 
                         </div>

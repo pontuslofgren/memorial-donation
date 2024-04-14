@@ -15,7 +15,7 @@ export function AppProvider({ children }) {
         appearance: {
             theme: 'stripe',
             variables: {
-                fontSizeBase: "14px"
+                fontSizeBase: "16px"
             },
             rules: {
                 '.Label': {
